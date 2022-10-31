@@ -1,0 +1,20 @@
+[alias]
+buildstd = ["build", "-Z", "build-std=std,panic_abort", "-Z", "build-std-features=panic_immediate_abort", "--release"]
+
+[build]
+target = "riscv64gc-unknown-linux-musl"
+
+[target.riscv64gc-unknown-linux-gnu]
+rustflags = ["-C", "target-feature=+crt-static"]
+linker = "/usr/bin/riscv64-linux-gnu-gcc"
+
+[target.riscv64gc-unknown-linux-musl]
+rustflags = [
+	"-L/opt/muslcc/riscv64-linux-musl-cross/lib/gcc/riscv64-linux-musl/11.2.1/",
+	"-L/opt/muslcc/riscv64-linux-musl-cross/riscv64-linux-musl/lib",
+	# "-C", "link-args=-Wl,-n,-N,--no-dynamic-linker", # these options (no page alignment) reduce size from 8KiB to 4KiB, but --no-dynamic-linker seems to cause an "Illegal instruction" error on the OC computer
+	"-C", "target-feature=-crt-static",
+	"-C", "link-args=-Wl,-no-pie,--build-id=none"
+]
+ar = "riscv64-linux-musl-ar"
+linker = "riscv64-linux-musl-gcc"
