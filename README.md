@@ -14,4 +14,5 @@ Final compiled binary size: ~8KiB
 ## Resources
 
 https://github.com/johnthagen/min-sized-rust
+
 https://darkcoding.net/software/a-very-small-rust-binary-indeed/
