@@ -1,0 +1,13 @@
+[package]
+name = "oc2_hello_world"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+strip = true
+panic = 'abort'
+codegen-units = 1
+opt-level = 'z'
+lto = true
+
+[dependencies]
